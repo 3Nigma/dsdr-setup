@@ -38,4 +38,5 @@ echo 'Filling in the nginx location aditional properties ...'
 
 # Go Docker-compose
 echo 'Firing up docker-compose ...'
-DOMAIN_NAME=$domain_name;EMAIL_ADDRESS=$email_address; docker-compose up -d
+{ echo "DOMAIN_NAME=$domain_name"; echo "EMAIL_ADDRESS=$email_address"; } > .env
+docker-compose up -d

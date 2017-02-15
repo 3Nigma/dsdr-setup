@@ -20,7 +20,10 @@ services:
        - /var/run/docker.sock:/var/run/docker.sock:ro
      volumes_from:
        - domain-router
-  
+     depends_on:
+       - "domain-router"
+     restart: always
+
   own-registry:
     image: registry:2
     environment:
@@ -31,3 +34,6 @@ services:
       - "VIRTUAL_PROTO=https"
       - "LETSENCRYPT_HOST=${DOMAIN_NAME}"
       - "LETSENCRYPT_EMAIL=${EMAIL_ADDRESS}"
+    depends_on:
+       - "domain-router-companion"
+    restart: always
